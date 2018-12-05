@@ -24,7 +24,7 @@ public class URLUtils {
     
     	
     	public static String geocoder =
-        "https://restapi.amap.com/v3/geocode/geo?key" + KEY;
+        "https://restapi.amap.com/v3/geocode/geo?key=" + KEY;
 
 
     /**
