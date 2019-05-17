@@ -19,10 +19,13 @@ public class App {
 
 		// write表头
 		writeHeader();
-
+		String[] typeList = new GetDatas().types.split("\\|");
+		System.out.println(typeList);
 		List<Rectangle> tasklist = getTaskList();
 		for (int i = 0; i < tasklist.size(); i++) {
-			GetDatas.getByBounds(tasklist.get(i));
+			for (int j = 0; j < typeList.length; j++) {
+				GetDatas.getByBounds(tasklist.get(i),typeList[j]);
+			}
 		}
 
 		long endTime = System.currentTimeMillis();
@@ -63,22 +66,37 @@ public class App {
 		List<PoiModel> rowList = new ArrayList<PoiModel>(20);
 
 		PoiModel header = new PoiModel();
-		header.formatted_address = "综合地址";
-		header.storeName = "名称";
-		header.longitude = "经度";
-		header.latitude = "纬度";
-
+		
+		header.id = "id";
+		
+		header.name = "name";
+		
+		header.type = "type";
+		
+		header.typeCode = "typeCode";
+		
+		header.formatted_address = "address";
+		
+		header.longitude = "lng";
+		
+		header.latitude = "lat";
+		
 		header.areaInfo = new Area();
-		header.areaInfo.province = "省份";
-		header.areaInfo.city = "市";
-		header.areaInfo.district = "区县";
-		header.areaInfo.town = "乡镇";
-		header.areaInfo.street = "街道";
-		header.areaInfo.street_number = "街道门牌号";
+		header.areaInfo.country = "country";
+		header.areaInfo.province = "province";
+		header.areaInfo.city = "city";
+		header.areaInfo.district = "district";
+		header.areaInfo.township = "township";
+		header.areaInfo.street = "street";
 		// header.areaInfo.adcode = "邮编代码";
 
 		rowList.add(header);
 		writeIntoCSV(rowList);
 	}
+	
+//	public static void main(String[] args) {
+//		System.out.println("===");
+//		new App().writeHeader();
+//	}
 
 }
